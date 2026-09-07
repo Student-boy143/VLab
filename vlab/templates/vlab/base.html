@@ -1,0 +1,272 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+        Django Virtual Lab
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet"
+          href="{% static 'vlab/css/style.css' %}">
+
+</head>
+
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="top-header">
+
+        <div class="header-left">
+
+            <button class="menu-btn" id="menuBtn">
+                ☰
+            </button>
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    ⚗
+                </div>
+
+                <div class="brand-text">
+                    <span>VIRTUAL</span>
+                    <strong>LABS</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="header-center">
+
+            <div class="department">
+                Computer Science & Engineering
+            </div>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <div class="rating">
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+            </div>
+
+            <button class="header-btn">
+                Rate Me
+            </button>
+
+            <button class="header-btn">
+                Report
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= BREADCRUMB ================= -->
+
+    <div class="breadcrumb">
+
+        <span>Home</span>
+
+        <span class="separator">›</span>
+
+        <span>Computer Science</span>
+
+        <span class="separator">›</span>
+
+        <span>Django Lab</span>
+
+        <span class="separator">›</span>
+
+        <strong>
+            Function-Based vs Class-Based Views
+        </strong>
+
+    </div>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="page-layout">
+
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-title">
+
+                <span class="sidebar-icon">▣</span>
+
+                <span>Experiment</span>
+
+            </div>
+
+
+            <nav class="experiment-nav">
+
+                <a href="#" class="nav-item active">
+
+                    <span class="nav-number">
+                        01
+                    </span>
+
+                    <span>Aim</span>
+
+                </a>
+
+
+                <a href="#" class="nav-item">
+
+                    <span class="nav-number">
+                        02
+                    </span>
+
+                    <span>Theory</span>
+
+                </a>
+
+
+                <a href="#" class="nav-item">
+
+                    <span class="nav-number">
+                        03
+                    </span>
+
+                    <span>Pretest</span>
+
+                </a>
+
+
+                <a href="#" class="nav-item">
+
+                    <span class="nav-number">
+                        04
+                    </span>
+
+                    <span>Procedure</span>
+
+                </a>
+
+
+                <a href="#" class="nav-item">
+
+                    <span class="nav-number">
+                        05
+                    </span>
+
+                    <span>Simulation</span>
+
+                </a>
+
+
+                <a href="#" class="nav-item">
+
+                    <span class="nav-number">
+                        06
+                    </span>
+
+                    <span>Posttest</span>
+
+                </a>
+
+
+                <a href="#" class="nav-item">
+
+                    <span class="nav-number">
+                        07
+                    </span>
+
+                    <span>References</span>
+
+                </a>
+
+
+                <a href="#" class="nav-item">
+
+                    <span class="nav-number">
+                        08
+                    </span>
+
+                    <span>Feedback</span>
+
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-footer">
+
+                <div class="progress-label">
+
+                    <span>Experiment Progress</span>
+
+                    <span>1 / 8</span>
+
+                </div>
+
+                <div class="progress-bar">
+
+                    <div class="progress-fill"></div>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- CONTENT -->
+
+        <main class="main-content">
+
+            {% block content %}
+
+            {% endblock %}
+
+        </main>
+
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div>
+            © 2026 Django Virtual Labs
+        </div>
+
+        <div>
+            Learn • Experiment • Understand
+        </div>
+
+    </footer>
+
+
+    <script src="{% static 'vlab/js/main.js' %}"></script>
+
+</body>
+
+</html>
