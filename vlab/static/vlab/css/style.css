@@ -31,6 +31,7 @@ html, body {
     color: var(--text-color);
     background-color: var(--white);
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
 }
 
 /* ==========================================================================
@@ -71,6 +72,7 @@ html, body {
     border: none;
     cursor: pointer;
     padding: 0;
+    outline: none;
 }
 
 .hamburger-btn .bar {
@@ -79,7 +81,7 @@ html, body {
     height: 2px;
     background-color: #777777;
     border-radius: 1px;
-    transition: 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .hamburger-btn:hover .bar {
@@ -241,14 +243,26 @@ html, body {
     align-items: flex-start;
     gap: 40px;
     min-height: calc(100vh - 220px);
+    transition: gap 0.3s ease;
 }
 
 /* Left Sidebar Navigation */
 .vlab-sidebar {
-    width: 170px;
+    width: 180px;
     flex-shrink: 0;
     background-color: var(--white);
     padding-top: 10px;
+    transition: width 0.3s ease, margin-right 0.3s ease, opacity 0.25s ease, visibility 0.3s ease;
+    overflow: hidden;
+}
+
+/* Desktop Collapsed Sidebar State */
+.vlab-sidebar.collapsed {
+    width: 0;
+    margin-right: -40px; /* Cancels out container gap smoothly */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
 
 .nav-list {
@@ -256,6 +270,7 @@ html, body {
     display: flex;
     flex-direction: column;
     gap: 14px;
+    min-width: 160px; /* Keeps links from wrapping during transition */
 }
 
 .nav-item {
@@ -291,6 +306,11 @@ html, body {
     min-width: 0; /* Prevents overflow in flex items */
     background-color: var(--white);
     padding-top: 5px;
+    transition: width 0.3s ease;
+}
+
+.vlab-content.expanded {
+    width: 100%;
 }
 
 .experiment-page {
@@ -455,48 +475,86 @@ code {
 }
 
 /* ==========================================================================
-   CONTRIBUTORS & SPECIAL SECTIONS
+   CONTRIBUTORS
    ========================================================================== */
 
 .contributors-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
     margin-top: 25px;
+}
+
+@media (max-width: 1024px) and (min-width: 601px) {
+    .contributors-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .contributors-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
 }
 
 .contributor-card {
     border: 1px solid var(--border-color);
     border-top: 3px solid var(--primary-blue);
-    padding: 20px;
+    padding: 24px 18px;
     background-color: var(--white);
-    border-radius: 2px;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contributor-card:hover {
+    border-color: #b0c8d8;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.contributor-avatar-placeholder {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background-color: #eaf2f7;
+    border: 1px solid #d0e0eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    color: #78909c;
+}
+
+.avatar-icon {
+    width: 36px;
+    height: 36px;
+    fill: #78909c;
+}
+
+.contributor-name {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--dark-blue);
+    margin-bottom: 4px;
 }
 
 .contributor-role {
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 700;
     color: var(--orange);
     text-transform: uppercase;
     letter-spacing: 0.8px;
-    margin-bottom: 6px;
-}
-
-.contributor-name {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--dark-blue);
-    margin-bottom: 6px;
-}
-
-.contributor-info {
-    font-size: 13.5px;
-    color: var(--muted-color);
     margin-bottom: 10px;
 }
 
 .contributor-desc {
-    font-size: 13.5px;
+    font-size: 13px;
     color: var(--text-color);
     line-height: 1.5;
     margin-bottom: 0;
@@ -966,7 +1024,7 @@ code {
     width: 100%;
     background-color: #000000;
     color: #ffffff;
-    padding: 20px 0 15px 0;
+    padding: 30px 0 20px 0;
     margin-top: auto;
 }
 
@@ -974,34 +1032,84 @@ code {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 25px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
     border-bottom: 1px solid #282828;
-    padding-bottom: 14px;
+    padding-bottom: 24px;
 }
 
-.footer-col a {
+.footer-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-heading {
     color: #ffffff;
+    font-size: 14.5px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: 0.3px;
+}
+
+.footer-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-links li {
+    margin: 0;
+    padding: 0;
+}
+
+.footer-links a {
+    color: #cccccc;
     text-decoration: none;
     font-size: 13.5px;
-    font-weight: 500;
-    letter-spacing: 0.2px;
+    font-weight: 400;
     transition: color 0.15s ease;
+    display: inline-block;
 }
 
-.footer-col a:hover {
+.footer-links a:hover {
     color: var(--orange);
     text-decoration: underline;
 }
 
+.footer-static-text {
+    color: #888888;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
 .footer-bottom-bar {
     max-width: 1400px;
-    margin: 12px auto 0 auto;
+    margin: 16px auto 0 auto;
     padding: 0 25px;
     text-align: center;
     font-size: 12px;
-    color: #888888;
+    color: #777777;
+}
+
+/* ==========================================================================
+   MOBILE BACKDROP
+   ========================================================================== */
+
+.vlab-sidebar-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.45);
+    z-index: 550;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 /* ==========================================================================
@@ -1052,29 +1160,64 @@ code {
     .vlab-page-container {
         padding: 15px 15px 40px 15px;
         flex-direction: column;
+        gap: 0;
+        position: relative;
     }
 
-    /* Mobile Sidebar: toggleable */
+    /* Mobile Sidebar: Slide-out Drawer / Overlay */
     .vlab-sidebar {
-        width: 100%;
-        display: none;
-        border-bottom: 1px solid var(--border-color);
-        padding-bottom: 15px;
-        margin-bottom: 15px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 260px;
+        max-width: 80vw;
+        height: 100%;
+        background-color: var(--white);
+        z-index: 600;
+        box-shadow: 2px 0 14px rgba(0, 0, 0, 0.18);
+        padding: 24px 20px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease, visibility 0.3s ease;
+        visibility: hidden;
+        overflow-y: auto;
+        margin-right: 0;
     }
 
+    .vlab-sidebar.mobile-open,
     .vlab-sidebar.open {
+        transform: translateX(0);
+        visibility: visible;
+        opacity: 1;
+    }
+
+    /* Override desktop collapsed on mobile */
+    .vlab-sidebar.collapsed {
+        width: 260px;
+        margin-right: 0;
+    }
+
+    /* Mobile Backdrop */
+    .vlab-sidebar-backdrop {
         display: block;
+        pointer-events: none;
+    }
+
+    .vlab-sidebar-backdrop.active {
+        pointer-events: auto;
+        opacity: 1;
     }
 
     .nav-list {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 10px 16px;
+        flex-direction: column;
+        gap: 16px;
+        min-width: 0;
     }
 
     .nav-link {
-        font-size: 14.5px;
+        font-size: 16px;
+        display: block;
+        padding: 6px 0;
     }
 
     .page-title {
@@ -1085,9 +1228,10 @@ code {
         font-size: 18px;
     }
 
+    /* Footer: 1 Column on Mobile */
     .footer-inner {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
+        grid-template-columns: 1fr;
+        gap: 24px;
+        text-align: left;
     }
 }
