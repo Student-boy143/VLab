@@ -1,0 +1,67 @@
+{% extends "vlab/base.html" %}
+
+{% block title %}Feedback - Function-Based Views vs Class-Based Views | Django Virtual Lab{% endblock %}
+
+{% block content %}
+<div class="experiment-page">
+
+    <h1 class="page-title text-center">Feedback</h1>
+    <hr class="vlab-divider">
+
+    <p class="experiment-intro">
+        Your feedback is valuable in helping us refine the curriculum, simulation clarity, and pedagogical quality of this Django Virtual Laboratory experiment.
+    </p>
+
+    <h2 class="section-title">Experiment Evaluation Form</h2>
+    <hr class="vlab-divider">
+
+    <form class="vlab-form" id="feedbackForm" onsubmit="event.preventDefault(); document.getElementById('feedbackSuccess').style.display='block';">
+        
+        <div class="form-group">
+            <label class="form-label"><strong>1. How clear were the learning objectives of this experiment?</strong></label>
+            <div class="form-radio-row">
+                <label><input type="radio" name="clarity" value="5" checked> Excellent</label>
+                <label><input type="radio" name="clarity" value="4"> Good</label>
+                <label><input type="radio" name="clarity" value="3"> Satisfactory</label>
+                <label><input type="radio" name="clarity" value="2"> Needs Improvement</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label"><strong>2. How effective was the interactive simulation in illustrating the difference between FBVs and CBVs?</strong></label>
+            <div class="form-radio-row">
+                <label><input type="radio" name="effectiveness" value="5" checked> Very Effective</label>
+                <label><input type="radio" name="effectiveness" value="4"> Effective</label>
+                <label><input type="radio" name="effectiveness" value="3"> Moderate</label>
+                <label><input type="radio" name="effectiveness" value="2"> Not Effective</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label"><strong>3. Overall rating for this experiment:</strong></label>
+            <div class="star-rating form-stars" id="feedbackStars">
+                <span class="star" data-rating="1">&#9733;</span>
+                <span class="star" data-rating="2">&#9733;</span>
+                <span class="star" data-rating="3">&#9733;</span>
+                <span class="star" data-rating="4">&#9733;</span>
+                <span class="star" data-rating="5">&#9733;</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="suggestions"><strong>4. Specific suggestions or improvements for this lab:</strong></label>
+            <textarea id="suggestions" class="vlab-textarea" rows="4" placeholder="Enter any comments, suggestions, or topics you would like expanded..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="vlab-btn btn-rate">Submit Feedback</button>
+        </div>
+
+        <div id="feedbackSuccess" class="alert-success-box" style="display: none;">
+            Thank you! Your feedback has been submitted successfully to the Virtual Lab team.
+        </div>
+
+    </form>
+
+</div>
+{% endblock %}

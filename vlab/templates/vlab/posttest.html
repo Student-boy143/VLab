@@ -1,0 +1,98 @@
+{% extends "vlab/base.html" %}
+
+{% block title %}Posttest - Function-Based Views vs Class-Based Views | Django Virtual Lab{% endblock %}
+
+{% block content %}
+<div class="experiment-page">
+
+    <h1 class="page-title text-center">Posttest</h1>
+    <hr class="vlab-divider">
+
+    <p class="experiment-intro">
+        Complete this post-experiment assessment to evaluate what you have learned about Function-Based Views, Class-Based Views, and Django's request-response lifecycle.
+    </p>
+
+    <div class="quiz-container">
+        
+        <!-- Question 1 -->
+        <div class="quiz-question-box" data-question="1">
+            <h3 class="question-title">1. How does a Django Class-Based View determine which HTTP method handler (e.g. <code>get()</code>, <code>post()</code>) to execute?</h3>
+            <div class="quiz-options">
+                <label class="quiz-option">
+                    <input type="radio" name="pq1" value="a">
+                    <span>A) The web server (Nginx/Apache) calls the Python method directly.</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="pq1" value="b" data-correct="true">
+                    <span>B) The view's internal <code>dispatch()</code> method inspects <code>request.method.lower()</code> and routes to the matching method.</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="pq1" value="c">
+                    <span>C) By using Python decorator syntax on every method.</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="pq1" value="d">
+                    <span>D) The Django ORM models decide the handler at compile time.</span>
+                </label>
+            </div>
+            <div class="quiz-feedback" id="feedback-pq1"></div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="quiz-question-box" data-question="2">
+            <h3 class="question-title">2. What is a key architectural advantage of Class-Based Views over Function-Based Views?</h3>
+            <div class="quiz-options">
+                <label class="quiz-option">
+                    <input type="radio" name="pq2" value="a" data-correct="true">
+                    <span>A) Ability to reuse common patterns via OOP inheritance, mixins, and generic views.</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="pq2" value="b">
+                    <span>B) CBVs bypass Django's middleware for faster response times.</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="pq2" value="c">
+                    <span>C) CBVs do not need URL routing in <code>urls.py</code>.</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="pq2" value="d">
+                    <span>D) CBVs cannot return an <code>HttpResponse</code>.</span>
+                </label>
+            </div>
+            <div class="quiz-feedback" id="feedback-pq2"></div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="quiz-question-box" data-question="3">
+            <h3 class="question-title">3. In a Function-Based View, how can you restrict incoming requests strictly to allowed HTTP methods?</h3>
+            <div class="quiz-options">
+                <label class="quiz-option">
+                    <input type="radio" name="pq3" value="a">
+                    <span>A) By declaring a <code>methods = ['GET', 'POST']</code> attribute in <code>models.py</code>.</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="pq3" value="b" data-correct="true">
+                    <span>B) By decorating the function with <code>@require_http_methods(["GET", "POST"])</code> or using manual conditional logic.</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="pq3" value="c">
+                    <span>C) Django automatically rejects any request method other than GET.</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="pq3" value="d">
+                    <span>D) By modifying the web browser headers.</span>
+                </label>
+            </div>
+            <div class="quiz-feedback" id="feedback-pq3"></div>
+        </div>
+
+        <div class="quiz-actions">
+            <button class="vlab-btn btn-rate" id="submitPostQuizBtn">Check Answers</button>
+            <button class="vlab-btn btn-outline" id="resetPostQuizBtn">Reset</button>
+            <span class="quiz-score-badge" id="postQuizScoreBadge"></span>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

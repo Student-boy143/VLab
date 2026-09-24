@@ -1,0 +1,98 @@
+{% extends "vlab/base.html" %}
+
+{% block title %}Pretest - Function-Based Views vs Class-Based Views | Django Virtual Lab{% endblock %}
+
+{% block content %}
+<div class="experiment-page">
+
+    <h1 class="page-title text-center">Pretest</h1>
+    <hr class="vlab-divider">
+
+    <p class="experiment-intro">
+        Please attempt the following diagnostic questions before proceeding with the experiment and simulation to gauge your prerequisite knowledge of Django view mechanics.
+    </p>
+
+    <div class="quiz-container">
+        
+        <!-- Question 1 -->
+        <div class="quiz-question-box" data-question="1">
+            <h3 class="question-title">1. What is the mandatory first argument received by any Django Function-Based View?</h3>
+            <div class="quiz-options">
+                <label class="quiz-option">
+                    <input type="radio" name="q1" value="a">
+                    <span>A) <code>HttpResponse</code></span>
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q1" value="b" data-correct="true">
+                    <span>B) <code>HttpRequest</code> (typically named <code>request</code>)</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q1" value="c">
+                    <span>C) <code>models.Model</code></span>
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q1" value="d">
+                    <span>D) <code>URLconf</code></span>
+                </label>
+            </div>
+            <div class="quiz-feedback" id="feedback-q1"></div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="quiz-question-box" data-question="2">
+            <h3 class="question-title">2. In Django, what class method is used to hook a Class-Based View into a URL pattern?</h3>
+            <div class="quiz-options">
+                <label class="quiz-option">
+                    <input type="radio" name="q2" value="a">
+                    <span>A) <code>MyView.render()</code></span>
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q2" value="b">
+                    <span>B) <code>MyView.dispatch()</code></span>
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q2" value="c" data-correct="true">
+                    <span>C) <code>MyView.as_view()</code></span>
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q2" value="d">
+                    <span>D) <code>MyView.initialize()</code></span>
+                </label>
+            </div>
+            <div class="quiz-feedback" id="feedback-q2"></div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="quiz-question-box" data-question="3">
+            <h3 class="question-title">3. What is the expected return value of any valid Django view?</h3>
+            <div class="quiz-options">
+                <label class="quiz-option">
+                    <input type="radio" name="q3" value="a">
+                    <span>A) A raw Python dictionary or string</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q3" value="b" data-correct="true">
+                    <span>B) An instance of <code>HttpResponse</code> (or subclass) or an exception</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q3" value="c">
+                    <span>C) A database queryset object</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="q3" value="d">
+                    <span>D) An HTML file path</span>
+                </label>
+            </div>
+            <div class="quiz-feedback" id="feedback-q3"></div>
+        </div>
+
+        <div class="quiz-actions">
+            <button class="vlab-btn btn-rate" id="submitQuizBtn">Check Answers</button>
+            <button class="vlab-btn btn-outline" id="resetQuizBtn">Reset</button>
+            <span class="quiz-score-badge" id="quizScoreBadge"></span>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

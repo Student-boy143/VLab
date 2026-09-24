@@ -1,0 +1,106 @@
+{% extends "vlab/base.html" %}
+
+{% block title %}Simulation - Function-Based Views vs Class-Based Views | Django Virtual Lab{% endblock %}
+
+{% block content %}
+<div class="experiment-page">
+
+    <h1 class="page-title text-center">Interactive Simulation: Request-Response Flow</h1>
+    <hr class="vlab-divider">
+
+    <p class="experiment-intro">
+        In this simulation, you can send simulated HTTP requests (<code>GET</code>, <code>POST</code>, etc.) to a Django endpoint and observe how the request is handled by either a <strong>Function-Based View</strong> or a <strong>Class-Based View</strong>.
+    </p>
+
+    <!-- Simulation Workbench -->
+    <div class="sim-workbench">
+        
+        <!-- Controls Bar -->
+        <div class="sim-control-panel">
+            <div class="sim-control-group">
+                <label for="viewTypeSelect"><strong>View Architecture:</strong></label>
+                <select id="viewTypeSelect" class="vlab-select">
+                    <option value="fbv">Function-Based View (FBV)</option>
+                    <option value="cbv">Class-Based View (CBV)</option>
+                </select>
+            </div>
+
+            <div class="sim-control-group">
+                <label for="httpMethodSelect"><strong>HTTP Method:</strong></label>
+                <select id="httpMethodSelect" class="vlab-select">
+                    <option value="GET">GET (Retrieve Data)</option>
+                    <option value="POST">POST (Create / Submit)</option>
+                    <option value="PUT">PUT (Update Data)</option>
+                    <option value="DELETE">DELETE (Delete Data)</option>
+                </select>
+            </div>
+
+            <div class="sim-control-group">
+                <button class="vlab-btn btn-rate" id="dispatchRequestBtn">Dispatch Request</button>
+                <button class="vlab-btn btn-outline" id="resetSimBtn">Reset Simulation</button>
+            </div>
+        </div>
+
+        <hr class="vlab-divider">
+
+        <!-- Visual Request Lifecycle Flow -->
+        <h3 class="underlined-heading">Django Request Lifecycle Pipeline</h3>
+        <div class="lifecycle-pipeline" id="lifecyclePipeline">
+            <div class="pipeline-step" id="stepClient">
+                <div class="step-num">1</div>
+                <div class="step-name">Client Request</div>
+                <div class="step-desc" id="clientDesc">GET /articles/ HTTP/1.1</div>
+            </div>
+            <div class="pipeline-arrow">&rarr;</div>
+            <div class="pipeline-step" id="stepUrl">
+                <div class="step-num">2</div>
+                <div class="step-name">URL Resolver</div>
+                <div class="step-desc" id="urlDesc">urls.py match</div>
+            </div>
+            <div class="pipeline-arrow">&rarr;</div>
+            <div class="pipeline-step" id="stepView">
+                <div class="step-num">3</div>
+                <div class="step-name">View Handler</div>
+                <div class="step-desc" id="viewDesc">FBV: article_view()</div>
+            </div>
+            <div class="pipeline-arrow">&rarr;</div>
+            <div class="pipeline-step" id="stepResponse">
+                <div class="step-num">4</div>
+                <div class="step-name">HttpResponse</div>
+                <div class="step-desc" id="responseDesc">Status: 200 OK</div>
+            </div>
+        </div>
+
+        <!-- Code & Inspection Section -->
+        <div class="sim-split-view">
+            
+            <!-- Code Column -->
+            <div class="sim-column">
+                <h4 class="subheading-blue">Active View Code</h4>
+                <div class="code-example-box">
+                    <pre class="vlab-code" id="viewCodeDisplay"><code># Select an architecture and dispatch to view code trace</code></pre>
+                </div>
+            </div>
+
+            <!-- Execution Log Column -->
+            <div class="sim-column">
+                <h4 class="subheading-blue">Django Internal Execution Trace</h4>
+                <div class="console-box" id="simConsole">
+                    <div class="console-line">Virtual Lab Ready. Select options above and click [Dispatch Request].</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Educational Comparison Note -->
+        <div class="sim-explanation-box" id="simExplanation">
+            <h4 class="subheading-blue">Observations &amp; Architecture Insights</h4>
+            <p id="explanationText">
+                Dispatch a request to observe how Django's execution path differs between Function-Based Views and Class-Based Views.
+            </p>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

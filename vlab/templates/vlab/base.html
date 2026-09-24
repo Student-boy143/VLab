@@ -1,272 +1,194 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>
-        {% block title %}
-        Django Virtual Lab
-        {% endblock %}
-    </title>
-
-    <link rel="stylesheet"
-          href="{% static 'vlab/css/style.css' %}">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Django Virtual Lab | Function-Based Views vs Class-Based Views{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'vlab/css/style.css' %}">
 </head>
-
-
 <body>
 
-    <!-- Header-->
+    <!-- VLab Top Header -->
+    <header class="vlab-header">
+        <div class="header-container">
+            <div class="header-left">
+                <button class="hamburger-btn" id="menuBtn" aria-label="Toggle navigation menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <a href="{% url 'experiment' %}" class="vlab-logo" aria-label="Virtual Labs Home">
+                    <div class="logo-icon-wrap">
+                        <svg class="beaker-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 6H25M20 6V16L29 30C29.8 31.3 28.8 33 27.3 33H12.7C11.2 33 10.2 31.3 11 30L20 16" stroke="#5cb85c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14 26C16.5 24 23.5 27 26 25" stroke="#1683c5" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="16" cy="28.5" r="1.5" fill="#1683c5"/>
+                            <circle cx="21" cy="29" r="1" fill="#1683c5"/>
+                            <circle cx="23.5" cy="22" r="1.5" fill="#5cb85c"/>
+                        </svg>
+                    </div>
+                    <div class="logo-text-wrap">
+                        <div class="logo-main"><span class="logo-virt">Virtual</span> <span class="logo-labs">Labs</span></div>
+                        <div class="logo-sub">An MoE Govt of India Initiative</div>
+                    </div>
+                </a>
+            </div>
 
-    <header class="top-header">
-
-        <div class="header-left">
-
-            <button class="menu-btn" id="menuBtn">
-                ☰
-            </button>
-
-            <div class="brand">
-
-                <div class="brand-icon">
-                    ⚗
+            <div class="header-right">
+                <div class="star-rating" title="Rating: 5 out of 5 stars">
+                    <span class="star">&#9734;</span>
+                    <span class="star">&#9734;</span>
+                    <span class="star">&#9734;</span>
+                    <span class="star">&#9734;</span>
+                    <span class="star">&#9734;</span>
                 </div>
-
-                <div class="brand-text">
-                    <span>VIRTUAL</span>
-                    <strong>LABS</strong>
-                </div>
-
+                <button class="vlab-btn btn-rate" id="rateMeBtn">Rate Me</button>
+                <button class="vlab-btn btn-report" id="reportBugBtn">Report a Bug</button>
             </div>
-
         </div>
-
-
-        <div class="header-center">
-
-            <div class="department">
-                Computer Science & Engineering
-            </div>
-
-        </div>
-
-
-        <div class="header-right">
-
-            <div class="rating">
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-            </div>
-
-            <button class="header-btn">
-                Rate Me
-            </button>
-
-            <button class="header-btn">
-                Report
-            </button>
-
-        </div>
-
     </header>
 
+    <!-- Orange Separator -->
+    <div class="header-orange-separator"></div>
 
     <!-- Breadcrumb -->
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <div class="breadcrumb-inner">
+            <span class="breadcrumb-item">Computer Engineering</span>
+            <span class="breadcrumb-sep">&gt;</span>
+            <span class="breadcrumb-item">Django</span>
+            <span class="breadcrumb-sep">&gt;</span>
+            <span class="breadcrumb-item active">Experiments</span>
+        </div>
+    </nav>
 
-    <div class="breadcrumb">
-
-        <span>Home</span>
-
-        <span class="separator">›</span>
-
-        <span>Computer Science</span>
-
-        <span class="separator">›</span>
-
-        <span>Django Lab</span>
-
-        <span class="separator">›</span>
-
-        <strong>
-            Function-Based vs Class-Based Views
-        </strong>
-
-    </div>
-
-
-    <!--  MAIN  -->
-
-    <div class="page-layout">
-
-
-        <!-- SIDEBAR -->
-
-        <aside class="sidebar" id="sidebar">
-
-            <div class="sidebar-title">
-
-                <span class="sidebar-icon">▣</span>
-
-                <span>Experiment</span>
-
-            </div>
-
-
-            <nav class="experiment-nav">
-
-                <a href="#" class="nav-item active">
-
-                    <span class="nav-number">
-                        01
-                    </span>
-
-                    <span>Aim</span>
-
-                </a>
-
-
-                <a href="#" class="nav-item">
-
-                    <span class="nav-number">
-                        02
-                    </span>
-
-                    <span>Theory</span>
-
-                </a>
-
-
-                <a href="#" class="nav-item">
-
-                    <span class="nav-number">
-                        03
-                    </span>
-
-                    <span>Pretest</span>
-
-                </a>
-
-
-                <a href="#" class="nav-item">
-
-                    <span class="nav-number">
-                        04
-                    </span>
-
-                    <span>Procedure</span>
-
-                </a>
-
-
-                <a href="#" class="nav-item">
-
-                    <span class="nav-number">
-                        05
-                    </span>
-
-                    <span>Simulation</span>
-
-                </a>
-
-
-                <a href="#" class="nav-item">
-
-                    <span class="nav-number">
-                        06
-                    </span>
-
-                    <span>Posttest</span>
-
-                </a>
-
-
-                <a href="#" class="nav-item">
-
-                    <span class="nav-number">
-                        07
-                    </span>
-
-                    <span>References</span>
-
-                </a>
-
-
-                <a href="#" class="nav-item">
-
-                    <span class="nav-number">
-                        08
-                    </span>
-
-                    <span>Feedback</span>
-
-                </a>
-
+    <!-- Main Layout: Left Sidebar + Main Content -->
+    <div class="vlab-page-container">
+        
+        <!-- Left Sidebar Navigation -->
+        <aside class="vlab-sidebar" id="sidebar">
+            <nav class="experiment-nav" aria-label="Experiment Sections">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="{% url 'experiment' %}" class="nav-link {% if active_page == 'experiment' or request.resolver_match.url_name == 'experiment' %}active{% endif %}">
+                            Aim
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'theory' %}" class="nav-link {% if active_page == 'theory' or request.resolver_match.url_name == 'theory' %}active{% endif %}">
+                            Theory
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'pretest' %}" class="nav-link {% if active_page == 'pretest' or request.resolver_match.url_name == 'pretest' %}active{% endif %}">
+                            Pretest
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'procedure' %}" class="nav-link {% if active_page == 'procedure' or request.resolver_match.url_name == 'procedure' %}active{% endif %}">
+                            Procedure
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'simulation' %}" class="nav-link {% if active_page == 'simulation' or request.resolver_match.url_name == 'simulation' %}active{% endif %}">
+                            Simulation
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'posttest' %}" class="nav-link {% if active_page == 'posttest' or request.resolver_match.url_name == 'posttest' %}active{% endif %}">
+                            Posttest
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'references' %}" class="nav-link {% if active_page == 'references' or request.resolver_match.url_name == 'references' %}active{% endif %}">
+                            References
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'contributors' %}" class="nav-link {% if active_page == 'contributors' or request.resolver_match.url_name == 'contributors' %}active{% endif %}">
+                            Contributors
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'feedback' %}" class="nav-link {% if active_page == 'feedback' or request.resolver_match.url_name == 'feedback' %}active{% endif %}">
+                            Feedback
+                        </a>
+                    </li>
+                </ul>
             </nav>
-
-
-            <div class="sidebar-footer">
-
-                <div class="progress-label">
-
-                    <span>Experiment Progress</span>
-
-                    <span>1 / 8</span>
-
-                </div>
-
-                <div class="progress-bar">
-
-                    <div class="progress-fill"></div>
-
-                </div>
-
-            </div>
-
         </aside>
 
-
-        <!-- CONTENT -->
-
-        <main class="main-content">
-
+        <!-- Main Content Area -->
+        <main class="vlab-content" id="mainContent">
             {% block content %}
-
             {% endblock %}
-
         </main>
-
 
     </div>
 
-
-    <!--  FOOTER  -->
-
-    <footer class="footer">
-
-        <div>
-            © 2026 Django Virtual Labs
+    <!-- Rating Modal -->
+    <div class="vlab-modal-backdrop" id="rateModal" aria-hidden="true">
+        <div class="vlab-modal">
+            <div class="vlab-modal-header">
+                <h3>Rate this Experiment</h3>
+                <button class="modal-close-btn" id="closeRateModal">&times;</button>
+            </div>
+            <div class="vlab-modal-body">
+                <p>How would you rate your learning experience with this Django lab?</p>
+                <div class="interactive-stars" id="modalStars">
+                    <span data-star="1">&#9733;</span>
+                    <span data-star="2">&#9733;</span>
+                    <span data-star="3">&#9733;</span>
+                    <span data-star="4">&#9733;</span>
+                    <span data-star="5">&#9733;</span>
+                </div>
+                <div class="modal-feedback-text">
+                    <textarea placeholder="Write any comments or feedback (optional)..." rows="3"></textarea>
+                </div>
+            </div>
+            <div class="vlab-modal-footer">
+                <button class="vlab-btn btn-rate" id="submitRatingBtn">Submit Rating</button>
+            </div>
         </div>
+    </div>
 
-        <div>
-            Learn • Experiment • Understand
+    <!-- Bug Report Modal -->
+    <div class="vlab-modal-backdrop" id="reportModal" aria-hidden="true">
+        <div class="vlab-modal">
+            <div class="vlab-modal-header">
+                <h3>Report an Issue / Bug</h3>
+                <button class="modal-close-btn" id="closeReportModal">&times;</button>
+            </div>
+            <div class="vlab-modal-body">
+                <p>Found a problem or error in this lab experiment?</p>
+                <input type="text" class="vlab-input" placeholder="Subject / Brief description">
+                <textarea class="vlab-textarea" placeholder="Detailed description of the issue or error encountered..." rows="4"></textarea>
+            </div>
+            <div class="vlab-modal-footer">
+                <button class="vlab-btn btn-report" id="submitReportBtn">Submit Bug Report</button>
+            </div>
         </div>
+    </div>
 
+    <!-- VLab Footer -->
+    <footer class="vlab-footer">
+        <div class="footer-inner">
+            <div class="footer-col">
+                <a href="#community">Community Links</a>
+            </div>
+            <div class="footer-col">
+                <a href="#contact">Contact Us</a>
+            </div>
+            <div class="footer-col">
+                <a href="#follow">Follow Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom-bar">
+            <span>&copy; 2026 Virtual Labs &bull; Django Programming Virtual Laboratory</span>
+        </div>
     </footer>
 
-
     <script src="{% static 'vlab/js/main.js' %}"></script>
-
 </body>
-
 </html>

@@ -1,0 +1,54 @@
+{% extends "vlab/base.html" %}
+
+{% block title %}Procedure - Function-Based Views vs Class-Based Views | Django Virtual Lab{% endblock %}
+
+{% block content %}
+<div class="experiment-page">
+
+    <h1 class="page-title text-center">Procedure</h1>
+    <hr class="vlab-divider">
+
+    <p class="experiment-intro">
+        Follow these systematic laboratory steps to complete the experiment and observe how Django routes and processes requests across Function-Based Views and Class-Based Views.
+    </p>
+
+    <h2 class="section-title">Laboratory Protocol</h2>
+    <hr class="vlab-divider">
+
+    <ol class="procedure-list">
+        <li>
+            <div class="procedure-step-title">Step 1: Read Aim and Conceptual Objectives</div>
+            <p>Begin by reviewing the <strong>Aim</strong> page to understand the purpose of comparing FBVs and CBVs in Django's MVT pattern.</p>
+        </li>
+        <li>
+            <div class="procedure-step-title">Step 2: Study the Theory Foundation</div>
+            <p>Carefully read the <strong>Theory</strong> page to examine the internal request-response lifecycle, procedural method branching in FBVs, and OOP method dispatching with <code>as_view()</code> in CBVs.</p>
+        </li>
+        <li>
+            <div class="procedure-step-title">Step 3: Complete Pretest Evaluation</div>
+            <p>Answer the diagnostic questions in the <strong>Pretest</strong> to verify prerequisite understanding of the <code>HttpRequest</code> object and view return types.</p>
+        </li>
+        <li>
+            <div class="procedure-step-title">Step 4: Launch the Interactive Simulation</div>
+            <p>Navigate to the <strong>Simulation</strong> tab. Select either <em>Function-Based View</em> or <em>Class-Based View</em> from the simulation control panel.</p>
+        </li>
+        <li>
+            <div class="procedure-step-title">Step 5: Configure and Transmit HTTP Requests</div>
+            <p>Select an HTTP Method (<code>GET</code>, <code>POST</code>, <code>PUT</code>, or <code>DELETE</code>), optionally specify query parameters or payload data, and press <strong>Send Request</strong>.</p>
+        </li>
+        <li>
+            <div class="procedure-step-title">Step 6: Trace the Execution Lifecycle</div>
+            <p>Observe the highlighted request path through Django components: <em>URLconf Resolution &rarr; Middleware &rarr; View Handler &rarr; Method Dispatcher &rarr; Template/Response Generation</em>.</p>
+        </li>
+        <li>
+            <div class="procedure-step-title">Step 7: Analyze Code &amp; Output Comparison</div>
+            <p>Inspect the side-by-side execution trace showing how the FBV (imperative <code>if/elif</code>) contrasts with the CBV (declarative method dispatching).</p>
+        </li>
+        <li>
+            <div class="procedure-step-title">Step 8: Assessment and Feedback</div>
+            <p>Proceed to the <strong>Posttest</strong> to assess concept retention, review references, and provide feedback on the experiment.</p>
+        </li>
+    </ol>
+
+</div>
+{% endblock %}

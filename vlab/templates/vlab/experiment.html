@@ -1,202 +1,59 @@
 {% extends "vlab/base.html" %}
 
-
-{% block title %}
-Function-Based vs Class-Based Views | Django Virtual Lab
-{% endblock %}
-
+{% block title %}Aim - Function-Based Views vs Class-Based Views | Django Virtual Lab{% endblock %}
 
 {% block content %}
+<div class="experiment-page">
 
+    <!-- Experiment Title -->
+    <h1 class="page-title text-center">Function-Based Views vs Class-Based Views</h1>
+    <hr class="vlab-divider">
 
-<!-- Page Heading -->
-
-<section class="experiment-heading">
-
-    <div class="experiment-tag">
-        DJANGO PROGRAMMING LAB
-    </div>
-
-    <h1>
-        Function-Based vs Class-Based Views
-    </h1>
-
-    <p>
-        Explore how Django handles requests using
-        Function-Based Views and Class-Based Views.
+    <!-- Short Introduction -->
+    <p class="experiment-intro">
+        This experiment introduces Function-Based Views (FBVs) and Class-Based Views (CBVs) in Django and demonstrates how both approaches handle HTTP requests and responses.
     </p>
 
-</section>
+    <!-- Objectives Section -->
+    <h2 class="section-title">Objectives</h2>
+    <hr class="vlab-divider">
 
-
-<!-- Aim Card -->
-
-<section class="content-card">
-
-    <div class="card-heading">
-
-        <div class="card-icon">
-            🎯
+    <div class="objectives-container">
+        
+        <div class="objective-block">
+            <h3 class="underlined-heading">Understanding Django Views</h3>
+            <ul class="vlab-list">
+                <li>Understand what a Django View is.</li>
+                <li>Learn how the Django web framework receives an <code>HttpRequest</code> and returns an <code>HttpResponse</code>.</li>
+            </ul>
         </div>
 
-        <div>
-
-            <span class="section-label">
-                EXPERIMENT 01
-            </span>
-
-            <h2>
-                Aim
-            </h2>
-
+        <div class="objective-block">
+            <h3 class="underlined-heading">Function-Based Views (FBV)</h3>
+            <ul class="vlab-list">
+                <li>Understand Function-Based Views.</li>
+                <li>Analyze explicit request handling using conditional method checks (such as <code>request.method == 'GET'</code> or <code>request.method == 'POST'</code>).</li>
+            </ul>
         </div>
 
-    </div>
-
-
-    <div class="card-body">
-
-        <p>
-            To understand and compare Function-Based Views (FBV)
-            and Class-Based Views (CBV) in Django, and learn how
-            both approaches handle HTTP requests and generate
-            responses.
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- Learning Objectives -->
-
-<section class="content-card">
-
-    <div class="card-heading">
-
-        <div class="card-icon">
-            💡
+        <div class="objective-block">
+            <h3 class="underlined-heading">Class-Based Views (CBV)</h3>
+            <ul class="vlab-list">
+                <li>Understand Class-Based Views.</li>
+                <li>Learn how object-oriented patterns, method dispatchers (e.g. <code>as_view()</code>), and class inheritance simplify view logic.</li>
+            </ul>
         </div>
 
-        <div>
-
-            <span class="section-label">
-                LEARNING OBJECTIVES
-            </span>
-
-            <h2>
-                What will you learn?
-            </h2>
-
+        <div class="objective-block">
+            <h3 class="underlined-heading">Comparison and Application</h3>
+            <ul class="vlab-list">
+                <li>Compare FBVs and CBVs.</li>
+                <li>Understand when each approach is useful.</li>
+                <li>Observe the request-response flow through an interactive simulation.</li>
+            </ul>
         </div>
 
     </div>
 
-
-    <div class="objectives">
-
-        <div class="objective">
-
-            <div class="objective-number">
-                01
-            </div>
-
-            <div>
-
-                <h3>
-                    Function-Based Views
-                </h3>
-
-                <p>
-                    Understand how Django views can be
-                    implemented using Python functions.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="objective">
-
-            <div class="objective-number">
-                02
-            </div>
-
-            <div>
-
-                <h3>
-                    Class-Based Views
-                </h3>
-
-                <p>
-                    Learn how classes and methods can be
-                    used to handle HTTP requests.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="objective">
-
-            <div class="objective-number">
-                03
-            </div>
-
-            <div>
-
-                <h3>
-                    Compare Both Approaches
-                </h3>
-
-                <p>
-                    Identify the differences, advantages
-                    and appropriate use cases of FBVs and CBVs.
-                </p>
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-<!-- Start Experiment -->
-
-<section class="start-card">
-
-    <div>
-
-        <span class="start-label">
-            READY TO EXPERIMENT?
-        </span>
-
-        <h2>
-            Let's explore Django Views
-        </h2>
-
-        <p>
-            Begin with the theory and then use the
-            interactive simulation to compare FBV and CBV.
-        </p>
-
-    </div>
-
-
-    <button class="start-button">
-
-        Start Experiment
-
-        <span>→</span>
-
-    </button>
-
-</section>
-
-
+</div>
 {% endblock %}

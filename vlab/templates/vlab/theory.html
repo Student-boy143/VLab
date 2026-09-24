@@ -1,0 +1,133 @@
+{% extends "vlab/base.html" %}
+
+{% block title %}Theory - Function-Based Views vs Class-Based Views | Django Virtual Lab{% endblock %}
+
+{% block content %}
+<div class="experiment-page">
+
+    <h1 class="page-title text-center">Theory: Function-Based Views vs Class-Based Views</h1>
+    <hr class="vlab-divider">
+
+    <!-- 1. What is a Django View? -->
+    <h2 class="section-title">1. What is a Django View?</h2>
+    <hr class="vlab-divider">
+    <p>
+        In Django's Model-View-Template (MVT) architectural pattern, a <strong>View</strong> is a Python callable (a function or a class) that accepts a web request and returns a web response. The response can be the HTML contents of a Web page, a redirect, a 404 error, an XML document, or an image.
+    </p>
+    <p>
+        Django views encapsulate the application logic necessary to process incoming data, interact with models (the database layer), and select the appropriate template or HTTP status code for the client.
+    </p>
+
+    <!-- 2. Function-Based Views (FBVs) -->
+    <h2 class="section-title">2. Function-Based Views (FBVs)</h2>
+    <hr class="vlab-divider">
+    <p>
+        Function-Based Views are standard Python functions that take an <code>HttpRequest</code> object as their first parameter (typically named <code>request</code>) and return an <code>HttpResponse</code> object.
+    </p>
+    <p>
+        HTTP method handling in FBVs is done imperatively using conditional statements like <code>if request.method == 'POST':</code>.
+    </p>
+    
+    <div class="code-example-box">
+        <div class="code-title">Example: Simple Function-Based View</div>
+        <pre class="vlab-code"><code>from django.shortcuts import render
+from django.http import HttpResponse
+
+def article_list(request):
+    if request.method == 'GET':
+        # Retrieve and render articles
+        articles = ["Django Overview", "Views Architecture", "Routing Guide"]
+        return render(request, 'articles.html', {'articles': articles})
+    elif request.method == 'POST':
+        # Process submitted article
+        return HttpResponse("Article created successfully", status=201)</code></pre>
+    </div>
+
+    <!-- 3. Class-Based Views (CBVs) -->
+    <h2 class="section-title">3. Class-Based Views (CBVs)</h2>
+    <hr class="vlab-divider">
+    <p>
+        Class-Based Views provide an object-oriented approach to implementing views in Django. Instead of procedural branching with conditional statements, HTTP methods are mapped directly to corresponding instance methods (such as <code>get()</code>, <code>post()</code>, <code>put()</code>, and <code>delete()</code>).
+    </p>
+    <p>
+        CBVs inherit from the base <code>django.views.View</code> class or generic view classes. The class is hooked into Django's URLconf via the class method <code>as_view()</code>.
+    </p>
+
+    <div class="code-example-box">
+        <div class="code-title">Example: Simple Class-Based View</div>
+        <pre class="vlab-code"><code>from django.views import View
+from django.shortcuts import render
+from django.http import HttpResponse
+
+class ArticleListView(View):
+    def get(self, request):
+        articles = ["Django Overview", "Views Architecture", "Routing Guide"]
+        return render(request, 'articles.html', {'articles': articles})
+
+    def post(self, request):
+        return HttpResponse("Article created successfully", status=201)</code></pre>
+    </div>
+
+    <!-- 4. Request-Response Lifecycle -->
+    <h2 class="section-title">4. Request-Response Lifecycle in Django</h2>
+    <hr class="vlab-divider">
+    <p>
+        When an HTTP request reaches the Django server, the lifecycle proceeds through the following sequential steps:
+    </p>
+    <ol class="vlab-ordered-list">
+        <li><strong>WSGI/ASGI Handler:</strong> Web server receives the raw request and initializes the <code>WSGIRequest</code> / <code>HttpRequest</code> object.</li>
+        <li><strong>Middleware Processing:</strong> Request middleware (security, sessions, CSRF, authentication) execute in order.</li>
+        <li><strong>URL Resolver:</strong> Django consults the root <code>URLconf</code> and matches the requested URL pattern to resolve the target view.</li>
+        <li><strong>View Execution:</strong>
+            <ul class="vlab-list">
+                <li><em>For FBVs:</em> The target function is called directly with <code>request</code> and matched URL parameters.</li>
+                <li><em>For CBVs:</em> The <code>as_view()</code> closure instantiates the view class, sets <code>self.request</code>, calls <code>dispatch()</code>, and routes execution to <code>get()</code>, <code>post()</code>, etc.</li>
+            </ul>
+        </li>
+        <li><strong>Response Generation:</strong> An <code>HttpResponse</code> instance is returned, processed by response middleware, and returned to the client browser.</li>
+    </ol>
+
+    <!-- 5. FBV vs CBV Comparison -->
+    <h2 class="section-title">5. FBV vs CBV Comparison</h2>
+    <hr class="vlab-divider">
+    <div class="table-responsive">
+        <table class="vlab-table">
+            <thead>
+                <tr>
+                    <th>Feature / Criterion</th>
+                    <th>Function-Based View (FBV)</th>
+                    <th>Class-Based View (CBV)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Implementation</strong></td>
+                    <td>Pure Python function</td>
+                    <td>Python class inheriting from <code>View</code></td>
+                </tr>
+                <tr>
+                    <td><strong>HTTP Method Routing</strong></td>
+                    <td>Manual <code>if/elif request.method == ...</code></td>
+                    <td>Automatic dispatching to <code>get()</code>, <code>post()</code>, etc.</td>
+                </tr>
+                <tr>
+                    <td><strong>Code Reuse</strong></td>
+                    <td>Achieved via helper functions or decorators</td>
+                    <td>Achieved via inheritance, mixins, and generic views</td>
+                </tr>
+                <tr>
+                    <td><strong>Readability & Simplicity</strong></td>
+                    <td>Explicit, straightforward control flow; easy to read</td>
+                    <td>Abstracted, modular; requires understanding class hierarchy</td>
+                </tr>
+                <tr>
+                    <td><strong>Best Use Cases</strong></td>
+                    <td>One-off custom views, complex custom workflows, simple endpoints</td>
+                    <td>CRUD operations, repetitive models, REST APIs, reusable logic</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}
